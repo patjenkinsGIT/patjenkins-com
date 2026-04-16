@@ -1,0 +1,15 @@
+{
+  "name": "patjenkins-com",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Patrick Jenkins — personal landing page",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/input.css -o ./styles.css --minify",
+    "build:dist": "mkdir -p dist && cp index.html styles.css dist/ && cp -r public/* dist/",
+    "build": "npm run build:css && npm run build:dist",
+    "dev": "tailwindcss -i ./src/input.css -o ./styles.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}
