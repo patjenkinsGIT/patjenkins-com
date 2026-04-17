@@ -42,30 +42,45 @@
     <main id="top">
       <!-- Hero -->
       <section class="container-prose pt-24 pb-20 sm:pt-32 sm:pb-28">
-        <p class="font-mono text-sm text-accent mb-5">Hello — I'm</p>
-        <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-5">
-          Patrick Jenkins.
-        </h1>
-        <h2 class="text-2xl sm:text-3xl font-semibold text-slate-300 tracking-tight mb-7 max-w-3xl">
-          Infrastructure &amp; Security Engineer
-          <span class="text-slate-500">·</span>
-          Solutions Engineer
-          <span class="text-slate-500">·</span>
-          Founder &amp; Builder
-        </h2>
-        <p class="max-w-2xl text-lg text-slate-400 leading-relaxed mb-9">
-          Sixteen years of hands-on infrastructure, security, and PKI work — now operating
-          at the intersection of enterprise consulting and independent product. I direct
-          an AI-augmented engineering stack to ship at small-team speed.
-        </p>
-        <div class="flex flex-wrap gap-3">
-          <a href="#contact" class="btn-primary">
-            Get in touch
-            <span aria-hidden="true">→</span>
-          </a>
-          <a href="./resume.pdf" class="btn-secondary" download>
-            Download résumé
-          </a>
+        <div class="grid gap-10 md:grid-cols-[minmax(0,1fr)_auto] md:gap-14 md:items-center">
+          <div>
+            <p class="font-mono text-sm text-accent mb-5">Hello — I'm</p>
+            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-5">
+              Patrick Jenkins.
+            </h1>
+            <h2 class="text-2xl sm:text-3xl font-semibold text-slate-300 tracking-tight mb-7 max-w-3xl">
+              Infrastructure &amp; Security Engineer
+              <span class="text-slate-500">·</span>
+              Solutions Engineer
+              <span class="text-slate-500">·</span>
+              Founder &amp; Builder
+            </h2>
+            <p class="max-w-2xl text-lg text-slate-400 leading-relaxed mb-9">
+              Sixteen years of hands-on infrastructure, security, and PKI work — now operating
+              at the intersection of enterprise consulting and independent product. I direct
+              an AI-augmented engineering stack to ship at small-team speed.
+            </p>
+            <div class="flex flex-wrap gap-3">
+              <a href="#contact" class="btn-primary">
+                Get in touch
+                <span aria-hidden="true">→</span>
+              </a>
+              <a href="./resume.pdf" class="btn-secondary" download>
+                Download résumé
+              </a>
+            </div>
+          </div>
+          <div class="order-first md:order-last md:justify-self-end">
+            <img
+              src="./headshot.jpg"
+              alt="Portrait of Patrick Jenkins"
+              width="561"
+              height="800"
+              loading="eager"
+              decoding="async"
+              class="w-40 sm:w-56 md:w-64 lg:w-72 aspect-[561/800] rounded-2xl object-cover ring-1 ring-navy-700 shadow-xl shadow-black/40"
+            />
+          </div>
         </div>
       </section>
 
