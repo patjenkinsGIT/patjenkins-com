@@ -34,6 +34,7 @@
           <li><a href="#about" class="hover:text-accent transition-colors">About</a></li>
           <li><a href="#ventures" class="hover:text-accent transition-colors">Ventures</a></li>
           <li><a href="#experience" class="hover:text-accent transition-colors">Experience</a></li>
+          <li><a href="#pj-showcase" class="hover:text-accent transition-colors">Credentials</a></li>
           <li><a href="#contact" class="hover:text-accent transition-colors">Contact</a></li>
         </ul>
       </nav>
@@ -259,9 +260,248 @@
         </a>
       </section>
 
+      <!-- Work & Credentials showcase: certifications + live GitHub repo grid -->
+      <section id="pj-showcase" class="container-prose py-20 sm:py-24 border-t border-navy-700">
+        <header class="mb-10">
+          <p class="section-heading">04 — Credentials</p>
+          <h2 class="section-title mb-3">Certifications.</h2>
+        </header>
+
+        <div class="pj-cert-grid" id="pj-certs"><!-- injected by JS --></div>
+
+        <header class="mt-20 mb-10">
+          <p class="section-heading">05 — Open source</p>
+          <h2 class="section-title mb-3">Projects &amp; repositories.</h2>
+          <p class="text-slate-400 max-w-2xl">Live from GitHub. Tools I've built for PKI automation, AI infrastructure, and getting more out of Claude.</p>
+        </header>
+
+        <div class="pj-repo-grid" id="pj-repos" aria-live="polite">
+          <!-- skeletons; replaced by JS -->
+          <div class="pj-skel"></div><div class="pj-skel"></div><div class="pj-skel"></div>
+        </div>
+
+        <p class="pj-more">
+          <a id="pj-ghlink" class="link font-medium" href="#" target="_blank" rel="noopener">See all repositories on GitHub →</a>
+        </p>
+
+        <style>
+          #pj-showcase{
+            --pj-panel:#0f1f3a; --pj-panel-2:#162a4a;
+            --pj-mute:#94a3b8; --pj-line:#162a4a;
+            --pj-accent:#22d3ee; --pj-accent-ink:#060f1f;
+            --pj-radius:12px;
+          }
+
+          /* --- cert cards --- */
+          #pj-showcase .pj-cert-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;}
+          #pj-showcase .pj-cert{
+            position:relative;border-radius:var(--pj-radius);padding:24px;
+            background:linear-gradient(135deg,var(--pj-panel),var(--pj-panel-2));
+            border:1px solid var(--pj-line);display:flex;gap:18px;align-items:flex-start;
+          }
+          #pj-showcase .pj-cert.pj-cert--feature{
+            background:linear-gradient(135deg,#0891b2,#22d3ee);color:var(--pj-accent-ink);border:none;
+          }
+          #pj-showcase .pj-cert--feature .pj-cert-issuer,
+          #pj-showcase .pj-cert--feature .pj-cert-meta{color:#083344;}
+          #pj-showcase .pj-badge{
+            flex:0 0 auto;width:52px;height:52px;border-radius:10px;display:grid;place-items:center;
+            background:rgba(255,255,255,.12);font-weight:700;font-size:13px;letter-spacing:.03em;color:#fff;
+          }
+          #pj-showcase .pj-cert--feature .pj-badge{background:rgba(6,15,31,.14);color:var(--pj-accent-ink);}
+          #pj-showcase .pj-credly{flex:0 0 auto;background:#fff;border-radius:10px;padding:8px 10px;min-width:150px;min-height:150px;display:flex;align-items:center;justify-content:center;}
+          #pj-showcase .pj-credly div{margin:0;}
+          #pj-showcase .pj-cert-name{font-size:19px;font-weight:700;margin:0 0 3px;line-height:1.25;}
+          #pj-showcase .pj-cert:not(.pj-cert--feature) .pj-cert-name{color:#fff;}
+          #pj-showcase .pj-cert-issuer{font-size:14px;font-weight:600;margin:0 0 10px;color:var(--pj-mute);}
+          #pj-showcase .pj-cert-meta{font-size:13px;color:var(--pj-mute);margin:0;}
+          #pj-showcase .pj-cert-link{
+            display:inline-block;margin-top:12px;font-weight:600;font-size:14px;text-decoration:none;
+            color:inherit;border-bottom:2px solid currentColor;padding-bottom:1px;
+          }
+          #pj-showcase .pj-chip{
+            display:inline-block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+            background:rgba(6,15,31,.16);color:var(--pj-accent-ink);border-radius:999px;padding:3px 9px;margin-bottom:8px;
+          }
+          #pj-showcase .pj-cert:not(.pj-cert--feature) .pj-chip{background:rgba(34,211,238,.14);color:var(--pj-accent);}
+
+          /* --- repo cards --- */
+          #pj-showcase .pj-repo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;margin-top:4px;}
+          #pj-showcase .pj-repo{
+            display:flex;flex-direction:column;border:1px solid var(--pj-line);border-radius:var(--pj-radius);
+            background:rgba(15,31,58,.5);padding:22px;text-decoration:none;color:inherit;transition:transform .15s ease,border-color .15s ease,background-color .15s ease;
+          }
+          #pj-showcase .pj-repo:hover{transform:translateY(-3px);border-color:rgba(34,211,238,.5);background:var(--pj-panel);}
+          #pj-showcase .pj-repo-top{display:flex;align-items:center;gap:9px;margin-bottom:10px;}
+          #pj-showcase .pj-repo-name{font-weight:700;font-size:17px;color:#fff;word-break:break-word;}
+          #pj-showcase .pj-pin{font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--pj-accent);text-transform:uppercase;}
+          #pj-showcase .pj-repo-desc{color:var(--pj-mute);font-size:14.5px;line-height:1.5;margin:0 0 16px;flex:1;}
+          #pj-showcase .pj-repo-foot{display:flex;gap:16px;align-items:center;font-size:13px;color:var(--pj-mute);}
+          #pj-showcase .pj-dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px;vertical-align:-1px;background:var(--pj-accent);}
+          #pj-showcase .pj-repo-foot span{display:inline-flex;align-items:center;}
+          #pj-showcase .pj-skel{height:170px;border-radius:var(--pj-radius);background:linear-gradient(90deg,#0f1f3a,#162a4a,#0f1f3a);background-size:200% 100%;animation:pjsh 1.2s infinite;}
+          @keyframes pjsh{0%{background-position:200% 0}100%{background-position:-200% 0}}
+          #pj-showcase .pj-more{margin-top:26px;}
+          #pj-showcase .pj-err{color:var(--pj-mute);font-size:14px;}
+          #pj-showcase .pj-cert > div:last-child{min-width:0;}
+          @media (max-width:560px){#pj-showcase .pj-cert{flex-direction:column;}}
+        </style>
+
+        <script>
+        (function () {
+          // ======================= CONFIG — EDIT ME =======================
+          const CONFIG = {
+            githubUsername: "patjenkinsGIT",
+
+            // Repos to always feature first, in this order. Names must match GitHub
+            // exactly. Anything here shows even if the API is unavailable.
+            pinned: [
+              {
+                name: "capability-audit",
+                desc: "A Claude skill that audits how well you're using Claude — surfaces unused tools, automation wins, and saves follow-ups to memory.",
+                language: "Markdown"
+              },
+              {
+                name: "pki-compliance-mcp",
+                desc: "MCP server that tracks PKI/certificate compliance deadlines (CA/B Forum, CCADB, root programs) and powers the FixMyCert compliance page.",
+                language: "Python",
+                // Lives inside the mcp-servers repo, not as its own repo:
+                url: "https://github.com/patjenkinsGIT/mcp-servers/tree/main/pki-compliance-mcp"
+              },
+              {
+                name: "cert-automation-toolkit",
+                desc: "PKI automation tools — certificate discovery, revocation, and migration (certrecon / certfire / massrev / certmove).",
+                language: "PowerShell"
+              }
+            ],
+
+            // Certifications, most important first. The first one renders as the
+            // featured (cyan) card.
+            certs: [
+              {
+                name: "NVIDIA-Certified Associate: AI Infrastructure and Operations",
+                short: "NCA-AIIO",
+                issuer: "NVIDIA",
+                meta: "GPU architecture · AI data-center operations — earned 2026",
+                link: "#",
+                feature: true,
+                chip: "Newly earned",
+                // Live, verifiable Credly badge — renders the official badge image:
+                credlyBadgeId: "c2c5c884-ac7d-4849-bd58-260142d463e7"
+              },
+              {
+                name: "NVIDIA-Certified Professional: AI Networking",
+                short: "NCP-AIN",
+                issuer: "NVIDIA",
+                meta: "Spectrum-X · InfiniBand · DOCA · BlueField DPUs",
+                link: "#",
+                feature: false,
+                chip: "In progress"
+              }
+            ],
+
+            // Repos to hide from the auto-filled list (e.g. parents of pinned
+            // subfolders, or anything not worth showcasing):
+            hidden: ["mcp-servers"],
+
+            maxRepos: 6  // total repo cards to show (pinned + newest)
+          };
+          // ================== END CONFIG (logic below) ====================
+
+          const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, c =>
+            ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+          // ---- certifications ----
+          function renderCerts() {
+            const wrap = document.getElementById("pj-certs");
+            wrap.innerHTML = CONFIG.certs.map(c => `
+              <div class="pj-cert ${c.feature ? "pj-cert--feature" : ""}">
+                ${c.credlyBadgeId
+                  ? `<div class="pj-credly"><div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="${esc(c.credlyBadgeId)}" data-share-badge-host="https://www.credly.com"></div></div>`
+                  : `<div class="pj-badge">${esc(c.short || "CERT")}</div>`}
+                <div>
+                  ${c.chip ? `<span class="pj-chip">${esc(c.chip)}</span>` : ""}
+                  <p class="pj-cert-name">${esc(c.name)}</p>
+                  <p class="pj-cert-issuer">${esc(c.issuer)}</p>
+                  <p class="pj-cert-meta">${esc(c.meta || "")}</p>
+                  ${c.link && c.link !== "#" ? `<a class="pj-cert-link" href="${esc(c.link)}" target="_blank" rel="noopener">Verify credential</a>` : ""}
+                </div>
+              </div>`).join("");
+
+            // Load Credly's official embed script once, after the badge divs exist.
+            if (CONFIG.certs.some(c => c.credlyBadgeId) && !window.__pjCredlyLoaded) {
+              window.__pjCredlyLoaded = true;
+              const s = document.createElement("script");
+              s.async = true;
+              s.src = "https://cdn.credly.com/assets/utilities/embed.js";
+              document.body.appendChild(s);
+            }
+          }
+
+          // ---- repositories ----
+          const card = (r) => `
+            <a class="pj-repo" href="${esc(r.html_url || ("https://github.com/" + CONFIG.githubUsername + "/" + r.name))}" target="_blank" rel="noopener">
+              <div class="pj-repo-top">
+                <span class="pj-repo-name">${esc(r.name)}</span>
+                ${r.__pinned ? '<span class="pj-pin">★ Pinned</span>' : ""}
+              </div>
+              <p class="pj-repo-desc">${esc(r.description || "No description yet.")}</p>
+              <div class="pj-repo-foot">
+                ${r.language ? `<span><i class="pj-dot"></i>${esc(r.language)}</span>` : ""}
+                ${typeof r.stargazers_count === "number" && r.stargazers_count > 0 ? `<span>★ ${r.stargazers_count}</span>` : ""}
+              </div>
+            </a>`;
+
+          function renderRepos(list) {
+            const grid = document.getElementById("pj-repos");
+            grid.innerHTML = list.slice(0, CONFIG.maxRepos).map(card).join("");
+          }
+
+          document.getElementById("pj-ghlink").href = "https://github.com/" + CONFIG.githubUsername + "?tab=repositories";
+          renderCerts();
+
+          // pinned fallbacks (used if API fails, and to enrich API data)
+          const pinnedFallback = CONFIG.pinned.map(p => ({
+            name: p.name, description: p.desc, language: p.language, __pinned: true,
+            html_url: p.url || ("https://github.com/" + CONFIG.githubUsername + "/" + p.name)
+          }));
+          renderRepos(pinnedFallback); // instant paint, no empty state
+
+          fetch(`https://api.github.com/users/${CONFIG.githubUsername}/repos?per_page=100&sort=updated`)
+            .then(r => r.ok ? r.json() : Promise.reject(r.status))
+            .then(repos => {
+              if (!Array.isArray(repos)) throw new Error("bad payload");
+              const hidden = new Set((CONFIG.hidden || []).map(n => n.toLowerCase()));
+              const active = repos.filter(r => !r.fork && !r.archived && !hidden.has(r.name.toLowerCase()));
+              const byName = Object.fromEntries(active.map(r => [r.name.toLowerCase(), r]));
+              const seen = new Set();
+              const ordered = [];
+              // pinned first (enriched with live stars/desc if present)
+              CONFIG.pinned.forEach(p => {
+                const live = byName[p.name.toLowerCase()];
+                const merged = live
+                  ? Object.assign({}, live, { __pinned: true, description: live.description || p.desc, html_url: p.url || live.html_url })
+                  : { name: p.name, description: p.desc, language: p.language, __pinned: true, html_url: p.url || ("https://github.com/" + CONFIG.githubUsername + "/" + p.name) };
+                ordered.push(merged); seen.add(p.name.toLowerCase());
+              });
+              // then newest of the rest
+              active.filter(r => !seen.has(r.name.toLowerCase())).forEach(r => ordered.push(r));
+              renderRepos(ordered);
+            })
+            .catch(() => {
+              // keep pinned fallback already on screen; add a soft note
+              const grid = document.getElementById("pj-repos");
+              if (!grid.querySelector(".pj-repo")) {
+                grid.innerHTML = '<p class="pj-err">Couldn’t reach GitHub right now — see all repositories via the link below.</p>';
+              }
+            });
+        })();
+        </script>
+      </section>
+
       <!-- Contact -->
       <section id="contact" class="container-prose py-20 sm:py-28 border-t border-navy-700">
-        <p class="section-heading">04 — Contact</p>
+        <p class="section-heading">06 — Contact</p>
         <h2 class="section-title mb-5">Let's talk.</h2>
         <p class="text-slate-400 max-w-2xl mb-10 text-lg leading-relaxed">
           I'm currently open to Solutions Engineering, Security Engineering, PKI
